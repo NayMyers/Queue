@@ -60,7 +60,7 @@ virtual Node<T>* nodeDequeue()
 	return pTmp;
 }
 template<typename T>
-T Queue<T>::dequeue(void)
+virtual T Queue<T>::dequeue(void)
 {
 	if (count == 0) throw "Queue Empty!";
 
@@ -80,7 +80,12 @@ T Queue<T>::dequeue(void)
 	return ret;
 }
 template<typename T>
-int Queue<T>::size(
+virtual void Queue<T>::enqueue()
+{
+
+}
+template<typename T>
+int Queue<T>::size()
 {
 	return count;
 }
