@@ -28,9 +28,61 @@ public:
 	int size(void);
 };
 template<typename T>
+Queue<T>::Queue()
+{
+	pFront = pTop = nullptr;
+}
+template<typename T>
+Queue<T>::~Queue()
+{
+	while (pTop != nullptr){ delete nodeDequeue(); }
+}
+template<typename T>
 void Queue<T>::push(T value)
 {
+	Node<T>* pTmp = new Node<T>;
+	pTmp->value = value;
+	pTmp->pNext = pTop;
+	pTop = pTmp;
+	count++;
+}
+template<typename T>
+virtual Node<T>* nodeDequeue()
+{
+	Node<T> *pTmp = pFront;
+	if (pFront != nullptr)
+	{
+		pFront = pFront->pPrevious;
+		if (pFront != nullptr) pFront->pNext = nullptr;
+		else pTop = pFront; //last node has been removed
+	}
 
+	return pTmp;
+}
+template<typename T>
+T Queue<T>::dequeue(void)
+{
+	if (count == 0) throw "Queue Empty!";
+
+	Node<T> *pTmp = nodeDequeue();
+	T ret;
+
+	if (pTmp != nullptr)
+	{
+		ret = pTmp->value;
+	}
+	else
+	{
+		throw "Error!";
+	}
+	delete pTmp;
+	count--;
+	return ret;
+}
+template<typename T>
+int Queue<T>::size(
+{
+	return count;
 }
 int main(void)
 {
