@@ -47,7 +47,7 @@ void Queue<T>::push(T value)
 	count++;
 }
 template<typename T>
-virtual Node<T>* nodeDequeue()
+Node<T>* nodeDequeue()
 {
 	Node<T> *pTmp = pFront;
 	if (pFront != nullptr)
@@ -60,7 +60,7 @@ virtual Node<T>* nodeDequeue()
 	return pTmp;
 }
 template<typename T>
-virtual T Queue<T>::dequeue(void)
+T Queue<T>::dequeue(void)
 {
 	if (count == 0) throw "Queue Empty!";
 
@@ -80,9 +80,9 @@ virtual T Queue<T>::dequeue(void)
 	return ret;
 }
 template<typename T>
-virtual void Queue<T>::enqueue()
+void Queue<T>::enqueue(T value)
 {
-
+	
 }
 template<typename T>
 int Queue<T>::size()
@@ -91,6 +91,24 @@ int Queue<T>::size()
 }
 int main(void)
 {
+	Queue<int>* MyQueue = new Queue<int>;
 
+	for (int count = 0; count < 10; count++)
+	{
+		MyQueue->enqueue(count);	
+	}
+	try
+	{
+		while (true)
+		{
+			cout << MyQueue->dequeue() << " ";
+		}
+	}
+	catch (char* message)
+	{
+		cout << message << endl;
+	}
+
+	delete MyQueue;
 	return 0;
 }
