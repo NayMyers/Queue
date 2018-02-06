@@ -47,7 +47,7 @@ void Queue<T>::push(T value)
 	count++;
 }
 template<typename T>
-Node<T>* nodeDequeue()
+Node<T>* Queue<T>::nodeDequeue(void)
 {
 	Node<T> *pTmp = pFront;
 	if (pFront != nullptr)
@@ -82,7 +82,10 @@ T Queue<T>::dequeue(void)
 template<typename T>
 void Queue<T>::enqueue(T value)
 {
-	
+	this->push(value);
+
+	if (pFront == nullptr) pFront = pTop;
+	else(pTop->pNext)->pPrevious = pTop;
 }
 template<typename T>
 int Queue<T>::size()
@@ -95,7 +98,7 @@ int main(void)
 
 	for (int count = 0; count < 10; count++)
 	{
-		MyQueue->enqueue(count);	
+		MyQueue->enqueue(count);
 	}
 	try
 	{
